@@ -1,5 +1,51 @@
+html, body {
+	height: 100%;
+}
+
+
 #aside {
 	width: 20%; 
 	height: 100%; 
-	background-color: green
+	background-color: green;
+	float: left;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+h1 {
+	text-align: center;
+	color: white;
+	margin-top: 5em;
+}
+
+header {
+	background-color: green;
+	height: 100px;
+}
+
+.asideLink {
+	text-align: center;
+	width: 100%;
+	height: 50px;
+}
+
+.asideLink a {
+	line-height: 50px;
+	text-decoration: none;
+	color: white;
+}
+
+#tableplayers {
+	width: 77%;
+	float: right;
+	margin-top: 2em;
+}
+
+.main {
+	width: 77%;
+	float: right;
+	margin-top: 2em;
 }
