@@ -17,11 +17,10 @@
   <header>
     <h1>My team manager</h1>
   </header>
-  <div id="nav">
-    <div class="asideLink"><a href="index.php">Home</a></div>
-    <div class="asideLink"><a href="players.php">Players</a><br></div>
-  
-  </div>
+  <?php
+      $active = 'players';
+      include (dirname(__FILE__).'/components/navbar.php');
+  ?>
   <div id="tableplayers">
     <h2>Players</h2>
     <table class="table">

@@ -49,16 +49,20 @@ header {
 	float: left;
 }
 
-.asideLink {
+.asideDiv {
 	text-align: center;
 	width: 100%;
 	height: 50px;
 }
 
-.asideLink a {
+.nav-link {
 	line-height: 50px;
 	text-decoration: none;
 	color: white;
+}
+
+.active {
+	text-decoration: underline;
 }
 
 #tableplayers {
