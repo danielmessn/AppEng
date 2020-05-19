@@ -1,13 +1,36 @@
-html, body {
-	height: 100%;
+
+html{
+	height:100%;
 }
 
+body{
+	min-height: 100%;
+}
 
-#aside {
+#nav {
 	width: 20%; 
 	height: 100%; 
 	background-color: green;
 	float: left;
+}
+
+#table {
+	width: 80%;
+	float: left;
+}
+
+.wrapper {
+    position: relative;
+	overflow: auto;
+	height: 100%;
+}
+
+.container {
+	width: 100%;
+}
+
+main {
+	width: 100%;
 }
 
 a {
@@ -18,12 +41,12 @@ a {
 h1 {
 	text-align: center;
 	color: white;
-	margin-top: 5em;
 }
 
 header {
 	background-color: green;
-	height: 100px;
+	width: 100%;
+	float: left;
 }
 
 .asideLink {
@@ -39,13 +62,14 @@ header {
 }
 
 #tableplayers {
-	width: 77%;
-	float: right;
-	margin-top: 2em;
+	width: 80%;
+	float: left;
+	padding: 2em;
 }
 
-.main {
-	width: 77%;
-	float: right;
+#divAddPlayers {
+	width: 80%;
 	margin-top: 2em;
+	float: left;
+	padding: 2em;
 }
