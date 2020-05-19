@@ -1,45 +1,3 @@
-<?php
-
-  // Define variables and initialize with empty values
-  $firstname = $lastname = $trikotnr = $birthdate = "";
-
-  //handling data from form
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-      $firstname = $_POST["firstname"];
-      $lastname = $_POST["lastname"];
-      $trikotnr = trim($_POST['trikotnr']);
-      $birthdate = trim($_POST['birthdate']);
-      
-
-      require_once('config.php');
-
-      $trikotnr = !empty($trikotnr) ? "'". mysqli_real_escape_string($link, $trikotnr)."'" : 'null';
-      $birthdate = !empty($birthdate) ? "'". mysqli_real_escape_string($link, $birthdate)."'" : 'null';
-
-      /* Build the query escaping the values */
-      $query = "INSERT INTO player (plyr_guid, plyr_firstname, plyr_lastname, plyr_trikotnr, plyr_birthdate) VALUES 
-      (uuid(), '" . mysqli_real_escape_string($link, $firstname) . "', '" . mysqli_real_escape_string($link, $lastname) . "'
-      , " . $trikotnr . ", " . $birthdate . ")";
-
-      echo "<p>" . $query . "</p>";
-
-      /* Execute the SQL query */
-      if (!mysqli_query($link, $query))
-      {
-        /* if mysqli_query() returns FALSE it means an error occurred */
-        echo 'Query error: ' . mysqli_error($link);
-        die();
-      }
-
-      echo "Player inserted!";
-
-      mysqli_close($link);
-
-      // Redirect user to players.php page
-      header("location: players.php");
-  }
-
-?>
 
 <!doctype html>
 
@@ -72,7 +30,7 @@
 		<div class="row">
 			<div class="col-md-12 order-md-1">
 				
-				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="needs-validation" novalidate>
+				<form action="api/addplayer.php" method="post" class="needs-validation" novalidate>
         
         <div class="form-row">
           <div class="col-md-6 mb-3">

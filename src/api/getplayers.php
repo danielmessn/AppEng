@@ -30,7 +30,6 @@
           <th scope="col">Last name</th>
           <th scope="col">Trikot Nr.</th>
           <th scope="col">Birthdate</th>
-          <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -57,8 +56,8 @@
       while ($row = mysqli_fetch_assoc($result))
       {
         echo "<tr><td>" . $row['plyr_firstname'] . "</td><td>" . $row['plyr_lastname'] . "</td><td>" . 
-              $row['plyr_trikotnr'] . "</td><td>" . $row['plyr_birthdate'] . "</td><td><button class=\"btn btn-default\">Edit</button>" . 
-              "<button class=\"btn btn-danger btnDelete\">Delete</button></td>";
+              $row['plyr_trikotnr'] . "</td><td>" . $row['plyr_birthdate'] . "</td><td><button class=\"btn btn-default\">Edit</button></td>" . 
+              "<td><button class=\"btn btn-danger\">Delete</button></td>";
       }
 
       $conn->close();
