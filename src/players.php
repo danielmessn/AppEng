@@ -33,35 +33,35 @@
           <th scope="col">Action</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="bodytableplayers">
 
     <?php
 
       /* Database connection.*/
-      require_once('db/config.php');
+      //require_once('db/config.php');
       
       /* Query */
-      $query = "SELECT * FROM player order by plyr_lastname";
+      //$query = "SELECT * FROM player order by plyr_lastname";
 
       /* Execute the query */
-      $result = $conn->query($query);
+      //$result = $conn->query($query);
 
       /* Check for errors */
-      if (!$result)
+      /*if (!$result)
       {
         echo 'Query error: ' . $conn->error;
         die();
-      }
+      }*/
 
       /* Iterate through the result set */
-      while ($row = mysqli_fetch_assoc($result))
+      /*while ($row = mysqli_fetch_assoc($result))
       {
         echo "<tr><td>" . $row['plyr_firstname'] . "</td><td>" . $row['plyr_lastname'] . "</td><td>" . 
               $row['plyr_trikotnr'] . "</td><td>" . $row['plyr_birthdate'] . "</td><td><button class=\"btn btn-default\">Edit</button>" . 
               "<button class=\"btn btn-danger btnDelete\">Delete</button></td>";
       }
 
-      $conn->close();
+      $conn->close();*/
 
     ?>
 
@@ -71,5 +71,35 @@
     <a class="btn btn-default" href="addplayer.php">Add player</a>
   </div>
 </div>
+
+<script type="text/javascript">
+      fetch('api/getplayers.php')
+        .then(function(response) {
+            return response.text();
+        }).then(function(data) {
+            if(data!='null'){
+              fillTable(JSON.parse(data));
+            }
+        }).catch(function(err) {
+            console.log ('error ', err);
+        })
+
+        function fillTable(data){
+          let row = '';
+          let table = '';
+          data.forEach(player => {            
+              row = '<tr>\
+              <td>'+ player.plyr_firstname +'</td>\
+              <td>'+ player.plyr_lastname +'</td>\
+              <td>'+ player.plyr_trikotnr +'</td>\
+              <td>'+ player.plyr_birthdate +'</td>\
+              <td><a href="api/getplayer.php?idPlayer='+player.plyr_guid+'" class=\"btn btn-default\">Edit</a><a href=\"#\" class=\"btn btn-danger btnDelete\">Delete</a></td>\
+              </tr>';
+              table += row;
+          });
+          document.getElementById("bodytableplayers").innerHTML=table;
+        }
+      </script>
+
 </body>
 </html>
