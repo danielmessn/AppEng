@@ -2,14 +2,10 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-
+  <?php
+    include (dirname(__FILE__).'/components/head.php');
+  ?>
   <title>My team manager</title>
-  <meta name="description" content="Soccer team manager">
-  <meta name="author" content="Daniel Messner, Manuel Messner">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -23,6 +19,10 @@
   ?>
     
 </div>
-  
+
+<?php
+    include (dirname(__FILE__).'/components/scripts.php');
+  ?>
+
 </body>
 </html>

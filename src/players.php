@@ -2,15 +2,10 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-
+  <?php
+    include (dirname(__FILE__).'/components/head.php');
+  ?>
   <title>My team manager</title>
-  <meta name="description" content="Soccer team manager">
-  <meta name="author" content="Daniel Messner, Manuel Messner">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -38,31 +33,6 @@
     <tbody id="bodytableplayers">
     <?php
 
-      /* Database connection.*/
-      //require_once('db/config.php');
-      
-      /* Query */
-      //$query = "SELECT * FROM player order by plyr_lastname";
-
-      /* Execute the query */
-      //$result = $conn->query($query);
-
-      /* Check for errors */
-      /*if (!$result)
-      {
-        echo 'Query error: ' . $conn->error;
-        die();
-      }*/
-
-      /* Iterate through the result set */
-      /*while ($row = mysqli_fetch_assoc($result))
-      {
-        echo "<tr><td>" . $row['plyr_firstname'] . "</td><td>" . $row['plyr_lastname'] . "</td><td>" . 
-              $row['plyr_trikotnr'] . "</td><td>" . $row['plyr_birthdate'] . "</td><td><button class=\"btn btn-default\">Edit</button>" . 
-              "<button class=\"btn btn-danger btnDelete\">Delete</button></td>";
-      }
-
-      $conn->close();*/
 
     ?>
 
@@ -72,6 +42,10 @@
     <a class="btn btn-default" href="addplayer.php">Add player</a>
   </div>
 </div>
+
+<?php
+    include (dirname(__FILE__).'/components/scripts.php');
+?>
 
 <script type="text/javascript">
         getPlayers();
@@ -83,6 +57,8 @@
             }).then(function(data) {
                 if(data!='null'){
                   fillTable(JSON.parse(data));
+                } else {
+                  $(".loader").hide();
                 }
             }).catch(function(err) {
                 console.log ('error ', err);
@@ -108,16 +84,19 @@
         }
 
         function deletePlayer(guidToRemove){
-          //todo: confirm modal
-          $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
-            if(result==1){
-              getPlayers();
-            } else {
-              alert("Something went wrong. Please try again.");
-            }
-          });
+          if(confirm("Delete Player?"))
+          {
+            $(".loader").show();
+            $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
+              if(result==1){
+                getPlayers();
+              } else {
+                alert("Something went wrong. Please try again.");
+                $(".loader").hide();
+              }
+            });
+          }
         }
       </script>
-
 </body>
 </html>
