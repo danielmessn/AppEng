@@ -1,6 +1,6 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'].'/db/config.php';
-    $guid = $_POST["guid"];
+    $guid = $conn->real_escape_string($_POST["guid"]);
 
     $sql="DELETE FROM player WHERE plyr_guid='$guid'";
 

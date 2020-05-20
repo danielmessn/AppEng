@@ -92,8 +92,8 @@
               row = '<tr>\
               <td>'+ player.plyr_firstname +'</td>\
               <td>'+ player.plyr_lastname +'</td>\
-              <td>'+ player.plyr_trikotnr +'</td>\
-              <td>'+ player.plyr_birthdate +'</td>\
+              <td>'+ ((player.plyr_trikotnr == null) ? '' : player.plyr_trikotnr) +'</td>\
+              <td>'+ ((player.plyr_birthdate == null) ? '' : player.plyr_birthdate) +'</td>\
               <td><a href="api/getplayer.php?idPlayer='+player.plyr_guid+'" class=\"btn btn-default\">Edit</a>'+
               '<button onClick=\"deletePlayer(\''+player.plyr_guid+'\')\" class=\"btn btn-danger btnDelete\">Delete</button></td>\
               </tr>';
@@ -106,7 +106,6 @@
           //todo: confirm modal
           $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
             if(result==1){
-              alert("Player successfully deleted!");
               location.reload();
             } else {
               alert("Something went wrong. Please try again.");
