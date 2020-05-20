@@ -24,6 +24,7 @@
   ?>
   <div id="tableplayers">
     <h2>Players</h2>
+    <div class="loader"></div>
     <table class="table">
     <thead>
         <tr>
@@ -35,7 +36,6 @@
         </tr>
     </thead>
     <tbody id="bodytableplayers">
-
     <?php
 
       /* Database connection.*/
@@ -74,16 +74,20 @@
 </div>
 
 <script type="text/javascript">
-      fetch('api/getplayers.php')
-        .then(function(response) {
-            return response.text();
-        }).then(function(data) {
-            if(data!='null'){
-              fillTable(JSON.parse(data));
-            }
-        }).catch(function(err) {
-            console.log ('error ', err);
-        })
+        getPlayers();
+
+        function getPlayers() {
+          fetch('api/getplayers.php')
+            .then(function(response) {
+                return response.text();
+            }).then(function(data) {
+                if(data!='null'){
+                  fillTable(JSON.parse(data));
+                }
+            }).catch(function(err) {
+                console.log ('error ', err);
+            })
+        }
 
         function fillTable(data){
           let row = '';
@@ -99,6 +103,7 @@
               </tr>';
               table += row;
           });
+          $(".loader").hide();
           document.getElementById("bodytableplayers").innerHTML=table;
         }
 
@@ -106,7 +111,7 @@
           //todo: confirm modal
           $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
             if(result==1){
-              location.reload();
+              getPlayers();
             } else {
               alert("Something went wrong. Please try again.");
             }
