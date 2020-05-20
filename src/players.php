@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -93,11 +94,24 @@
               <td>'+ player.plyr_lastname +'</td>\
               <td>'+ player.plyr_trikotnr +'</td>\
               <td>'+ player.plyr_birthdate +'</td>\
-              <td><a href="api/getplayer.php?idPlayer='+player.plyr_guid+'" class=\"btn btn-default\">Edit</a><a href=\"#\" class=\"btn btn-danger btnDelete\">Delete</a></td>\
+              <td><a href="api/getplayer.php?idPlayer='+player.plyr_guid+'" class=\"btn btn-default\">Edit</a>'+
+              '<button onClick=\"deletePlayer(\''+player.plyr_guid+'\')\" class=\"btn btn-danger btnDelete\">Delete</button></td>\
               </tr>';
               table += row;
           });
           document.getElementById("bodytableplayers").innerHTML=table;
+        }
+
+        function deletePlayer(guidToRemove){
+          //todo: confirm modal
+          $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
+            if(result==1){
+              alert("Player successfully deleted!");
+              location.reload();
+            } else {
+              alert("Something went wrong. Please try again.");
+            }
+          });
         }
       </script>
 
