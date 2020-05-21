@@ -40,11 +40,16 @@
     </table>
 
     <a class="btn btn-default" href="addplayer.php">Add player</a>
+
   </div>
 </div>
 
 <?php
     include (dirname(__FILE__).'/components/scripts.php');
+
+    $modalText = "Delete player?";
+    $myFunction = "deletePlayer";
+    include (dirname(__FILE__).'/components/modal.php');
 ?>
 
 <script type="text/javascript">
@@ -75,7 +80,7 @@
               <td>'+ ((player.plyr_trikotnr == null) ? '' : player.plyr_trikotnr) +'</td>\
               <td>'+ ((player.plyr_birthdate == null) ? '' : player.plyr_birthdate) +'</td>\
               <td><a href="api/getplayer.php?idPlayer='+player.plyr_guid+'" class=\"btn btn-default\">Edit</a>'+
-              '<button onClick=\"deletePlayer(\''+player.plyr_guid+'\')\" class=\"btn btn-danger btnDelete\">Delete</button></td>\
+              '<a onClick=\"setGuidToDelete(\''+player.plyr_guid+'\')\" href=\"#modalDialog\" rel=\"modal:open\" class=\"btn btn-danger btnDelete\">Delete</a></td>\
               </tr>';
               table += row;
           });
@@ -84,8 +89,6 @@
         }
 
         function deletePlayer(guidToRemove){
-          if(confirm("Delete Player?"))
-          {
             $(".loader").show();
             $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
               if(result==1){
@@ -95,8 +98,8 @@
                 $(".loader").hide();
               }
             });
-          }
         }
+
       </script>
 </body>
 </html>
