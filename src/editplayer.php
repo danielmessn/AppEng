@@ -21,7 +21,7 @@
   
   <div class="main" id="divAddPlayers">
   <div class="container">
-
+  <h2 class="width100">Edit Player</h2>
 		<div class="row">
 			<div class="col-md-12 order-md-1">
 				
@@ -58,8 +58,22 @@
               <input type="date" class="form-control" name="birthdate" id="birthdate">
             </div>
           </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <label for="selectPosition">
+                    Pisition
+                </label>
+                <select id="selectPosition" name ="position" class="selectpicker form-control" data-live-search="true" required>
+                </select>
+            </div>
+          </div>
+          
         </div>
-				<button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-default" type="submit">Save</button>
+        <a onClick="setGuidToDelete(getCurrentGuid())" href="#modalDialog" rel="modal:open" class="btn btn-danger">Delete</a>
+        <div class="ml-5 spinner-border text-dark" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
 				</form>
 			</div>
 		</div>
@@ -69,9 +83,17 @@
 
 <?php
     include (dirname(__FILE__).'/components/scripts.php');
+
+    $modalText = "Delete player?";
+    $myFunction = "deletePlayer";
+    include (dirname(__FILE__).'/components/modal.php');
+
+    include (dirname(__FILE__).'/components/scriptsSelect.php');
 ?>
 
 <script type="text/javascript">
+    $(".spinner-border").hide();
+
     (function() {
         let url = window.location.href;
         let params = url.slice(url.lastIndexOf('?'),url.length);
@@ -80,27 +102,82 @@
             $("input[name='"+key+"']").val(value);
         });
     })();
-</script>
 
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-	'use strict';
-	window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-    	form.addEventListener('submit', function(event) {
-    		if (form.checkValidity() === false) {
-    			event.preventDefault();
-    			event.stopPropagation();
-    		}
-    		form.classList.add('was-validated');
-    	}, false);
+    fetch('api/getpositions.php')
+      .then(function(response) {
+          return response.text();
+      }).then(function(data) {
+          if(data!='null'){
+              addPositions(JSON.parse(data));
+          }
+      }).catch(function(err) {
+          console.log ('error ', err);
+      });
+
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+  }, false);
+  })();
+
+  function addPositions(data){
+    checkData = true;
+    let option = '';
+    let select = '';
+    //if no position selected
+    select = '<option value="">'; 
+    data.forEach(position => {       
+        option = '<option value="'+position.pos_guid+'">';    
+        option += position.pos_shortcut + '</option>';
+        select += option;
     });
-}, false);
-})();
+    document.getElementById("selectPosition").innerHTML=select;
+    setTimeout(setData(),200);
+  }
+
+  function setData(){
+      if(checkData==true){
+          let url = window.location.href;
+          let params = url.slice(url.lastIndexOf('?'),url.length);
+          let searchParams = new URLSearchParams(params);
+          searchParams.forEach(function(value, key) {
+              $("#"+key).val(value);
+          });
+          $('.selectpicker').selectpicker('refresh');
+          $('.selectpicker').selectpicker('render');
+      }
+  }
+
+  function deletePlayer(guidToRemove){
+      $(".spinner-border").show();
+      $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
+        if(result==1){
+          window.location.href = "players.php";
+        } else {
+          alert("Something went wrong. Please try again.");
+          $(".spinner-border").hide();
+        }
+      });
+  }
+
+  function getCurrentGuid()
+  {
+    return $('#guid-player').val();
+  }
+
 </script>
 </div>
 

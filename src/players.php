@@ -73,7 +73,8 @@
         function fillTable(data){
           let row = '';
           let table = '';
-          data.forEach(player => {            
+  
+          data.forEach(player => {     
               row = '<tr>\
               <td>'+ player.plyr_firstname +'</td>\
               <td>'+ player.plyr_lastname +'</td>\
@@ -84,6 +85,7 @@
               </tr>';
               table += row;
           });
+
           $(".loader").hide();
           document.getElementById("bodytableplayers").innerHTML=table;
         }

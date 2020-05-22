@@ -4,7 +4,7 @@
 <!-- Modal HTML embedded directly into document -->
 <div id="modalDialog" class="reset-this modal">
   <p><?php echo $modalText?></p>
-  <p id="guidModal" name="guidModal" class="d-none"></p>
+  <p id="guidModal" class="d-none"></p>
   <a class="btn btn-primary" href="#" onClick="<?php echo $myFunction?>(getGuidToDelete())" rel="modal:close">Yes</a>
   <a class="btn btn-default" href="#" rel="modal:close">No</a>
 </div>

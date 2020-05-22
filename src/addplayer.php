@@ -21,7 +21,7 @@
   
   <div class="main" id="divAddPlayers">
   <div class="container">
-
+  <h2 class="width100">Add Player</h2>
 		<div class="row">
 			<div class="col-md-12 order-md-1">
 				
@@ -59,7 +59,7 @@
             </div>
           </div>
         </div>
-				<button class="btn btn-primary" type="submit">Add player</button>
+				<button class="btn btn-default" type="submit">Add player</button>
 				</form>
 			</div>
 		</div>
@@ -71,7 +71,7 @@
     include (dirname(__FILE__).'/components/scripts.php');
 ?>
 
-<script>
+<script type="text/javascript">
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
 	'use strict';

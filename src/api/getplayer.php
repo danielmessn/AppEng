@@ -11,8 +11,9 @@
             $lastname = $row["plyr_lastname"];
             $trikotnr= $row["plyr_trikotnr"];
             $birthdate = $row["plyr_birthdate"];
+            $posguid = $row["plyr_pos_guid"];             
         }
     }
-    header("Location: ../editplayer.php?guid=".$guid."&firstname=".$firstname."&lastname=".$lastname."&trikotnr=".$trikotnr."&birthdate=".$birthdate); 
+    header("Location: ../editplayer.php?guid=".$guid."&firstname=".$firstname."&lastname=".$lastname."&trikotnr=".$trikotnr."&birthdate=".$birthdate."&selectPosition=".$posguid); 
     $conn->close();
 ?>
