@@ -63,7 +63,7 @@
                 <label for="selectPosition">
                     Pisition
                 </label>
-                <select id="selectPosition" name ="position" class="selectpicker form-control" data-live-search="true" required>
+                <select id="selectPosition" name ="position" class="selectpicker form-control" data-live-search="true">
                 </select>
             </div>
           </div>

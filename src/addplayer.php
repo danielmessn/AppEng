@@ -58,6 +58,15 @@
               <input type="date" class="form-control" name="birthdate" id="birthdate">
             </div>
           </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <label for="selectPosition">
+                    Pisition
+                </label>
+                <select id="selectPosition" name ="position" class="selectpicker form-control" data-live-search="true">
+                </select>
+            </div>
+          </div>
         </div>
 				<button class="btn btn-default" type="submit">Add player</button>
 				</form>
@@ -69,9 +78,22 @@
   
 <?php
     include (dirname(__FILE__).'/components/scripts.php');
+    include (dirname(__FILE__).'/components/scriptsSelect.php');
 ?>
 
 <script type="text/javascript">
+
+fetch('api/getpositions.php')
+      .then(function(response) {
+          return response.text();
+      }).then(function(data) {
+          if(data!='null'){
+              addPositions(JSON.parse(data));
+          }
+      }).catch(function(err) {
+          console.log ('error ', err);
+      });
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
 	'use strict';
@@ -90,6 +112,35 @@
     });
 }, false);
 })();
+
+function addPositions(data){
+    checkData = true;
+    let option = '';
+    let select = '';
+    //if no position selected
+    select = '<option value="">'; 
+    data.forEach(position => {       
+        option = '<option value="'+position.pos_guid+'">';    
+        option += position.pos_shortcut + '</option>';
+        select += option;
+    });
+    document.getElementById("selectPosition").innerHTML=select;
+    setTimeout(setData(),200);
+  }
+
+  function setData(){
+      if(checkData==true){
+          let url = window.location.href;
+          let params = url.slice(url.lastIndexOf('?'),url.length);
+          let searchParams = new URLSearchParams(params);
+          searchParams.forEach(function(value, key) {
+              $("#"+key).val(value);
+          });
+          $('.selectpicker').selectpicker('refresh');
+          $('.selectpicker').selectpicker('render');
+      }
+  }
+
 </script>
 </div>
 </body>
