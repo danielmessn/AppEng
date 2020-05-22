@@ -17,7 +17,7 @@
       $active = 'players';
       include (dirname(__FILE__).'/components/navbar.php');
   ?>
-  <div id="tableplayers">
+  <div id="pageContent">
     <h2>Players</h2>
     <div class="loader"></div>
     <table class="table">

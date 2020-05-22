@@ -65,7 +65,7 @@ header {
 	text-decoration: underline;
 }
 
-#tableplayers {
+#pageContent {
 	width: 80%;
 	float: left;
 	padding: 2em;
@@ -86,6 +86,7 @@ h2 {
 }
 
 .width100 {
+    float: left;
     width: 100%;
 }
 
