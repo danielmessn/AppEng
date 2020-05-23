@@ -26,7 +26,7 @@
           <label for="selectTeam">
               Change Team
           </label>
-          <select id="selectTeam" name ="team" class="selectpicker form-control" data-live-search="true">
+          <select id="selectTeam" name ="team" class="selectpicker form-control" data-live-search="true" onchange="changeTeam(this.value)">
           </select>
       </div>
     </div>
@@ -36,11 +36,25 @@
 
 <?php
     include (dirname(__FILE__).'/components/scripts.php');
-
+    include (dirname(__FILE__).'/components/scriptsSelect.php');
     
 ?>
 
 <script type="text/javascript">
+
+var selectedTeam = '';
+
+fetch('api/getsettings.php')
+      .then(function(response) {
+          return response.text();
+      }).then(function(data) {
+          if(data!='null'){
+              getSettings(JSON.parse(data));
+          }
+      }).catch(function(err) {
+          console.log ('error ', err);
+      });
+
 
 fetch('api/getteams.php')
       .then(function(response) {
@@ -54,6 +68,14 @@ fetch('api/getteams.php')
           console.log ('error ', err);
           $(".loader").hide();
       });
+
+  function getSettings(data)
+  {
+    data.forEach(setting => {       
+        selectedTeam = setting.set_team_guid;
+    });
+  }
+
 
   function addTeams(data){
     checkData = true;
@@ -71,8 +93,20 @@ fetch('api/getteams.php')
   }
 
   function setData(){
+      $('#selectTeam').val(selectedTeam);
       $('.selectpicker').selectpicker('refresh');
       $('.selectpicker').selectpicker('render');
+  }
+
+  function changeTeam(teamguid)
+  {
+    $(".loader").show();
+      $.post("api/changeteam.php", {guid: teamguid}, function(result){
+        if(result!=1){
+          alert("Something went wrong. Please try again.");
+        }
+        $(".loader").hide();
+      });
   }
 
 </script>

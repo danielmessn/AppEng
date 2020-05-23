@@ -1,7 +1,19 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'].'/db/config.php';
 
-    $sql="SELECT * FROM player ORDER BY plyr_lastname";
+    $teamguid = '';
+
+    if(isset($_GET['teamguid']))
+        $teamguid = $_GET['teamguid'];
+
+    if(empty($teamguid))
+        $sql="SELECT * FROM player ORDER BY plyr_lastname";
+    else
+        $sql = "Select * from player inner JOIN
+        player_to_team on player.plyr_guid = player_to_team.plyrtoteam_plyr_guid
+        where player_to_team.plyrtoteam_team_guid = '". $conn->real_escape_string($teamguid). "'
+        order by player.plyr_lastname";
+
     $result = $conn->query($sql);
     $toJSON = [];
     if ($result->num_rows > 0) {

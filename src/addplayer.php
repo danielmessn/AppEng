@@ -26,7 +26,7 @@
 			<div class="col-md-12 order-md-1">
 				
 				<form action="api/addplayer.php" method="post" class="needs-validation" novalidate>
-        
+        <input id="guid-team" type="hidden" name="teamguid" class="form-control">
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="firstname">First name</label>
@@ -82,6 +82,15 @@
 ?>
 
 <script type="text/javascript">
+
+(function() {
+        let url = window.location.href;
+        let params = url.slice(url.lastIndexOf('?'),url.length);
+        let searchParams = new URLSearchParams(params);
+        searchParams.forEach(function(value, key) {
+            $("input[name='"+key+"']").val(value);
+        });
+    })();
 
 fetch('api/getpositions.php')
       .then(function(response) {

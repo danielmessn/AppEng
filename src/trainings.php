@@ -14,19 +14,17 @@
     <h1>My team manager</h1>
   </header>
   <?php
-      $active = 'players';
+      $active = 'trainings';
       include (dirname(__FILE__).'/components/navbar.php');
   ?>
   <div id="pageContent">
-    <h2>Players</h2>
+    <h2>Trainings</h2>
     <div class="loader"></div>
     <table class="table">
     <thead>
         <tr>
-          <th scope="col">First name</th>
-          <th scope="col">Last name</th>
-          <th scope="col">Trikot Nr.</th>
-          <th scope="col">Birthdate</th>
+          <th scope="col">Date and time</th>
+          <th scope="col">Description</th>
           <th scope="col">Action</th>
         </tr>
     </thead>
@@ -39,7 +37,7 @@
     </tbody>
     </table>
 
-    <a class="btn btn-default" href="#" onmouseover="this.href = &quot;addplayer.php?teamguid=&quot; + getSelectedTeam()">Add player</a>
+    <a class="btn btn-default" href="#" onmouseover="this.href = &quot;addtraining.php?teamguid=&quot; + getSelectedTeam()">Add training</a>
 
   </div>
 </div>
@@ -47,8 +45,8 @@
 <?php
     include (dirname(__FILE__).'/components/scripts.php');
 
-    $modalText = "Delete player?";
-    $myFunction = "deletePlayer";
+    $modalText = "Delete training?";
+    $myFunction = "deleteTraining";
     include (dirname(__FILE__).'/components/modal.php');
 ?>
 
@@ -70,11 +68,11 @@
           data.forEach(setting => {       
               selectedTeam = setting.set_team_guid;
           });
-          getPlayers(selectedTeam);
+          getTrainings(selectedTeam);
         }
 
-        function getPlayers(teamguid) {
-          fetch('api/getplayers.php?teamguid='+teamguid)
+        function getTrainings(teamguid) {
+          fetch('api/gettrainings.php?teamguid='+teamguid)
             .then(function(response) {
                 return response.text();
             }).then(function(data) {
@@ -92,14 +90,12 @@
           let row = '';
           let table = '';
   
-          data.forEach(player => {     
+          data.forEach(training => {    
               row = '<tr>\
-              <td>'+ player.plyr_firstname +'</td>\
-              <td>'+ player.plyr_lastname +'</td>\
-              <td>'+ ((player.plyr_trikotnr == null) ? '' : player.plyr_trikotnr) +'</td>\
-              <td>'+ ((player.plyr_birthdate == null) ? '' : player.plyr_birthdate) +'</td>\
-              <td><a href="api/getplayer.php?idPlayer='+player.plyr_guid+'" class=\"btn btn-default\">Edit</a>'+
-              '<a onClick=\"setGuidToDelete(\''+player.plyr_guid+'\')\" href=\"#modalDialog\" rel=\"modal:open\" class=\"btn btn-danger btnDelete\">Delete</a></td>\
+              <td>'+ training.train_datetime +'</td>\
+              <td>'+ ((training.train_desc == null) ? '' : training.train_desc) +'</td>\
+              <td><a href="api/gettraining.php?guidTraining='+training.train_guid+'" class=\"btn btn-default\">Edit</a>'+
+              '<a onClick=\"setGuidToDelete(\''+training.train_guid+'\')\" href=\"#modalDialog\" rel=\"modal:open\" class=\"btn btn-danger btnDelete\">Delete</a></td>\
               </tr>';
               table += row;
           });
@@ -108,11 +104,11 @@
           document.getElementById("bodytableplayers").innerHTML=table;
         }
 
-        function deletePlayer(guidToRemove){
+        function deleteTraining(guidToRemove){
             $(".loader").show();
-            $.post("api/deleteplayer.php", {guid: guidToRemove}, function(result){
+            $.post("api/deletetraining.php", {guid: guidToRemove}, function(result){
               if(result==1){
-                getPlayers(selectedTeam);
+                getTrainings(selectedTeam);
               } else {
                 alert("Something went wrong. Please try again.");
                 $(".loader").hide();
