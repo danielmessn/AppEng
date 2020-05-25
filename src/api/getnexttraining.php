@@ -9,7 +9,8 @@
     if(empty($teamguid))
         $sql="SELECT * FROM trainings ORDER BY train_datetime limit 1";
     else
-        $sql = "SELECT * FROM trainings WHERE train_team_guid = '" . $conn->real_escape_string($teamguid) . "' limit 1";
+        $sql = "SELECT * FROM trainings WHERE train_team_guid = '" . $conn->real_escape_string($teamguid) . "' ORDER BY train_datetime limit 1";
+
 
     $result = $conn->query($sql);
     $toJSON = [];

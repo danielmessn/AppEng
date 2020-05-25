@@ -9,7 +9,7 @@
     if(empty($teamguid))
         $sql="SELECT * FROM trainings ORDER BY train_datetime";
     else
-        $sql = "SELECT * FROM trainings WHERE train_team_guid = '" . $conn->real_escape_string($teamguid) . "'";
+        $sql = "SELECT * FROM trainings WHERE train_team_guid = '" . $conn->real_escape_string($teamguid) . "' ORDER BY train_datetime";
 
     $result = $conn->query($sql);
     $toJSON = [];
