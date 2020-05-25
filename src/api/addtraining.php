@@ -5,16 +5,17 @@
 
   //handling data from form
   if($_SERVER["REQUEST_METHOD"] == "POST"){
-      $datetime = $_POST["datetime"];
-      $desc = $_POST["desc"];
-      $teamguid = $_POST["teamguid"];
-    
+
       require_once($_SERVER['DOCUMENT_ROOT'].'/db/config.php');
 
-      $desc = !empty($desc) ? "'". $conn->real_escape_string($desc)."'" : 'null';
+      $datetime = $conn->real_escape_string($_POST["datetime"]);
+      $desc = $conn->real_escape_string($_POST["desc"]);
+      $teamguid = $conn->real_escape_string($_POST["teamguid"]);
+
+      $desc = !empty(trim($desc)) ? "'".$desc."'" : 'null';
 
       /* Build the query escaping the values */
-      $query = "INSERT INTO trainings VALUES (uuid(), '" . $conn->real_escape_string($datetime) . "', " . $desc . ",'" . $conn->real_escape_string($teamguid) . "')";
+      $query = "INSERT INTO trainings VALUES (uuid(), '$datetime', $desc,'$teamguid')";
 
       /* Execute the SQL query */
       if ($conn->query($query))
