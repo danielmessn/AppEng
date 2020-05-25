@@ -31,7 +31,7 @@
           <div class="col-md-6 mb-3">
             <label for="datetime">Date and time</label>
             <div class="input-group">
-              <input type="text" class="form-control" name="datetime" id="datetime" required>
+              <input type="datetime-local" class="form-control" name="datetime" id="datetime" required>
               <div class="invalid-feedback">
                 Please enter date and time.
               </div>
@@ -43,7 +43,7 @@
               <input type="text" class="form-control" name="desc" id="desc">
             </div>
           </div>
-          
+        </div>
         </div>
         <button class="btn btn-default" type="submit">Add training</button>
 				</form>
@@ -64,6 +64,9 @@
         let params = url.slice(url.lastIndexOf('?'),url.length);
         let searchParams = new URLSearchParams(params);
         searchParams.forEach(function(value, key) {
+            if(key == 'datetime')
+              value = value.replace(' ', 'T')
+
             $("input[name='"+key+"']").val(value);
         });
     })();

@@ -31,7 +31,7 @@
           <div class="col-md-6 mb-3">
             <label for="datetime">Date and time</label>
             <div class="input-group">
-              <input type="text" class="form-control" name="datetime" id="datetime" required>
+              <input type="datetime-local" class="form-control" name="datetime" id="datetime" required>
               <div class="invalid-feedback">
                 Please enter date and time.
               </div>
@@ -74,6 +74,10 @@
         let params = url.slice(url.lastIndexOf('?'),url.length);
         let searchParams = new URLSearchParams(params);
         searchParams.forEach(function(value, key) {
+            //format for picker
+            if(key == 'datetime')
+              value = value.replace(' ', 'T')
+            
             $("input[name='"+key+"']").val(value);
         });
     })();

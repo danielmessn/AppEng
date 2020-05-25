@@ -57,7 +57,7 @@ fetch('api/getsettings.php')
         }
 
         function getTrainings(teamguid) {
-          fetch('api/gettrainings.php?teamguid='+teamguid)
+          fetch('api/getnexttraining.php?teamguid='+teamguid)
             .then(function(response) {
                 return response.text();
             }).then(function(data) {

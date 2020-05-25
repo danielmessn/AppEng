@@ -113,6 +113,11 @@ h2 {
   transition: all .2s linear;
 }
 
+#nextTraining:hover, #nextMatch:hover {
+    box-shadow: 2px 8px 45px rgba(0, 0, 0, .15);
+    transform: translate3D(0, -2px, 0);
+  }
+
 h3 {
     margin-bottom: 1em;
 }
