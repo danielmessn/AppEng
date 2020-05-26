@@ -1,12 +1,4 @@
 
-html{
-	height:100%;
-}
-
-body{
-	min-height: 100%;
-}
-
 #nav {
 	width: 20%; 
 	height: 100%; 
@@ -14,23 +6,18 @@ body{
 	float: left;
 }
 
-#table {
-	width: 80%;
-	float: left;
+form {
+    width: 100%;
+    float: left;
 }
 
-.wrapper {
-    position: relative;
-	overflow: auto;
-	height: 100%;
+.btn-default {
+    float: left;
 }
 
-.container {
-	width: 100%;
-}
-
-main {
-	width: 100%;
+.row {
+    width: 100%;
+    float: left;
 }
 
 a {
@@ -71,28 +58,14 @@ header {
 	padding: 2em;
 }
 
-#divAddPlayers {
-	width: 80%;
-	float: left;
-	padding: 2em;
-}
-
 .btnDelete {
 	margin-left: 1em;
-}
-
-.btnAdd {
-    float: left;
 }
 
 h2 {
     float: left;
 }
 
-.width100 {
-    float: left;
-    width: 100%;
-}
 
 .loader {
 	border: 8px solid #f3f3f3; 

@@ -19,9 +19,9 @@
       include (dirname(__FILE__).'/components/navbar.php');
   ?>
   
-  <div class="main" id="divAddPlayers">
+  <div id="pageContent">
   <div class="container">
-  <h2 class="width100">Edit Training</h2>
+  <h2>Edit Training</h2>
 		<div class="row">
 			<div class="col-md-12 order-md-1">
 				
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="lastname">Description</label>
+            <label for="desc">Description</label>
             <div class="input-group">
               <input type="text" class="form-control" name="desc" id="desc">
             </div>

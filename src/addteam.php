@@ -19,17 +19,17 @@
       include (dirname(__FILE__).'/components/navbar.php');
   ?>
   
-  <div class="main" id="divAddPlayers">
+  <div id="pageContent">
   <div class="container">
-  <h2 class="width100">Create new team</h2>
+  <h2>Create new team</h2>
 		<div class="row">
 			<div class="col-md-12 order-md-1">
 				<form action="api/addteam.php" method="post" class="needs-validation" novalidate>
         <div class="form-row">
           <div class="col-md-6 mb-3">
-            <label for="lastname">Name</label>
+            <label for="desc">Name</label>
             <div class="input-group">
-              <input type="text" class="form-control" name="desc" id="desc" required>
+              <input type="text" class="form-control" name="desc" id="desc" required pattern=".*\S+.*">
               <div class="invalid-feedback">
                 Please enter name.
               </div>

@@ -19,9 +19,9 @@
       include (dirname(__FILE__).'/components/navbar.php');
   ?>
   
-  <div class="main" id="divAddPlayers">
+  <div id="pageContent">
   <div class="container">
-  <h2 class="width100">Add Player</h2>
+  <h2>Add Player</h2>
 		<div class="row">
 			<div class="col-md-12 order-md-1">
 				
@@ -31,7 +31,7 @@
           <div class="col-md-6 mb-3">
             <label for="firstname">First name</label>
             <div class="input-group">
-              <input type="text" class="form-control" name="firstname" id="firstname" required>
+              <input type="text" class="form-control" name="firstname" id="firstname" required pattern=".*\S+.*">
               <div class="invalid-feedback">
                 Please enter first name.
               </div>
@@ -40,14 +40,14 @@
           <div class="col-md-6 mb-3">
             <label for="lastname">Last name</label>
             <div class="input-group">
-              <input type="text" class="form-control" name="lastname" id="lastname" required>
+              <input type="text" class="form-control" name="lastname" id="lastname" required pattern=".*\S+.*">
               <div class="invalid-feedback">
                 Please enter last name.
               </div>
             </div>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="firstname">Trikot nr</label>
+            <label for="trikotnr">Trikot nr</label>
             <div class="input-group">
               <input type="text" class="form-control" name="trikotnr" id="trikotnr">
             </div>

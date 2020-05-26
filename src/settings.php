@@ -20,7 +20,7 @@
   <div id="pageContent">
     <h2>Settings</h2>
     <div class="loader"></div>
-    <form class="width100">
+    <form>
       <div class="col-md-6 mb-3">
         <div class="form-group">
             <label for="selectTeam">
@@ -31,8 +31,8 @@
         </div>
     </div>
     </form>
-    <a class="btn btn-default btnAdd" href="#" onmouseover="this.href = &quot;api/getteam.php?guidTeam=&quot; + getSelectedTeam()">Edit team</a>
-    <a class="btn btn-default btnAdd" href="addteam.php">Create new team</a>
+    <a class="btn btn-default" href="#" onmouseover="this.href = &quot;api/getteam.php?guidTeam=&quot; + getSelectedTeam()">Edit team</a>
+    <a class="btn btn-default" href="addteam.php">Create new team</a>
   </div>
 </div>
 
