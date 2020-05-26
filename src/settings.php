@@ -21,16 +21,18 @@
     <h2>Settings</h2>
     <div class="loader"></div>
     <form class="width100">
-    <div class="col-md-6 mb-3">
-      <div class="form-group">
-          <label for="selectTeam">
-              Change Team
-          </label>
-          <select id="selectTeam" name ="team" class="selectpicker form-control" data-live-search="true" onchange="changeTeam(this.value)">
-          </select>
-      </div>
+      <div class="col-md-6 mb-3">
+        <div class="form-group">
+            <label for="selectTeam">
+                Change Team
+            </label>
+            <select id="selectTeam" name ="team" class="selectpicker form-control" data-live-search="true" onchange="changeTeam(this.value)">
+            </select>
+        </div>
     </div>
-  </form>
+    </form>
+    <a class="btn btn-default btnAdd" href="#" onmouseover="this.href = &quot;api/getteam.php?guidTeam=&quot; + getSelectedTeam()">Edit team</a>
+    <a class="btn btn-default btnAdd" href="addteam.php">Create new team</a>
   </div>
 </div>
 
@@ -55,7 +57,8 @@ fetch('api/getsettings.php')
           console.log ('error ', err);
       });
 
-
+function getTeams()
+{
 fetch('api/getteams.php')
       .then(function(response) {
           return response.text();
@@ -68,12 +71,14 @@ fetch('api/getteams.php')
           console.log ('error ', err);
           $(".loader").hide();
       });
+}
 
   function getSettings(data)
   {
     data.forEach(setting => {       
         selectedTeam = setting.set_team_guid;
     });
+    getTeams();
   }
 
 
@@ -107,6 +112,11 @@ fetch('api/getteams.php')
         }
         $(".loader").hide();
       });
+  }
+
+  function getSelectedTeam()
+  {
+    return selectedTeam;
   }
 
 </script>

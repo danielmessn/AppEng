@@ -30,7 +30,6 @@
       {
         // Redirect user to players.php page
         $playerinserted = true;
-        header("location: ../players.php");
       } else {
         /* if mysqli_query() returns FALSE it means an error occurred */
         echo 'Query error: ' . $conn->error;
@@ -50,8 +49,6 @@
         } else {
           /* if mysqli_query() returns FALSE it means an error occurred */
           echo 'Query error: ' . $conn->error;
-          $conn->close();
-          die();
         }
 
         $conn->close();

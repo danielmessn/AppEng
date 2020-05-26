@@ -81,6 +81,10 @@ header {
 	margin-left: 1em;
 }
 
+.btnAdd {
+    float: left;
+}
+
 h2 {
     float: left;
 }
