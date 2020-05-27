@@ -65,6 +65,7 @@ fetch('api/getsettings.php')
                   createContent(JSON.parse(data));
                 } else {
                   $(".loader").hide();
+                  $("#nextTraining").html($("#nextTraining").html() + '<p>No training planned</p>');
                 }
             }).catch(function(err) {
                 console.log ('error ', err);
