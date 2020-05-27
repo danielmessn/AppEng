@@ -17,7 +17,7 @@
       $active = 'index';
       include (dirname(__FILE__).'/components/navbar.php');
   ?>
-  <div class="row" id="pageContent">
+  <div class="row h-25" id="pageContent">
     <div class="col-12">
       <h2>Home</h2>
       <div class="loader"></div>

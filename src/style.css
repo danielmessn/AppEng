@@ -1,9 +1,14 @@
 
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #nav {
 	width: 20%; 
-	height: 100%; 
 	background-color: green;
-	float: left;
+    flex-shrink: 0;
+    min-height: 100vh;
 }
 
 form {
@@ -33,7 +38,7 @@ h1 {
 header {
 	background-color: green;
 	width: 100%;
-	float: left;
+    flex-shrink: 0;
 }
 
 .asideDiv {
@@ -54,8 +59,8 @@ header {
 
 #pageContent {
 	width: 80%;
-	float: left;
-	padding: 2em;
+    padding: 2em;
+    flex-grow: 1;
 }
 
 .btnDelete {
