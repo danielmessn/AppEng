@@ -33,6 +33,7 @@
     </form>
     <a class="btn btn-default" href="#" onmouseover="this.href = &quot;api/getteam.php?guidTeam=&quot; + getSelectedTeam()">Edit team</a>
     <a class="btn btn-default" href="addteam.php">Create new team</a>
+    <a onClick="setGuidToDelete(getSelectedTeam())" href="#modalDialog" rel="modal:open" class="btn btn-danger">Delete team</a>
   </div>
 </div>
 
@@ -40,6 +41,9 @@
     include (dirname(__FILE__).'/components/scripts.php');
     include (dirname(__FILE__).'/components/scriptsSelect.php');
     
+    $modalText = "Delete team with all trainings and matches?";
+    $myFunction = "deleteTeam";
+    include (dirname(__FILE__).'/components/modal.php');
 ?>
 
 <script type="text/javascript">
@@ -117,6 +121,18 @@ fetch('api/getteams.php')
   function getSelectedTeam()
   {
     return selectedTeam;
+  }
+
+  function deleteTeam(guidToRemove){
+      $(".loader").show();
+      $.post("api/deleteteam.php", {guid: guidToRemove}, function(result){
+        if(result==1){
+          location.reload();
+        } else {
+          alert("Something went wrong. Please try again.");
+          $(".loader").hide();
+        }
+      });
   }
 
 </script>

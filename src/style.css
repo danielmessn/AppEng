@@ -16,7 +16,7 @@ form {
     float: left;
 }
 
-.btn-default {
+.btn-default, .btn-danger, .btn-primary {
     float: left;
 }
 
@@ -64,7 +64,7 @@ header {
 }
 
 .btnDelete {
-	margin-left: 1em;
+    margin-left: 1em;
 }
 
 h2 {
