@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2020 at 07:52 AM
+-- Generation Time: May 28, 2020 at 07:57 AM
 -- Server version: 8.0.19
 -- PHP Version: 7.3.5
 
@@ -43,14 +43,10 @@ CREATE TABLE `player` (
 
 INSERT INTO `player` (`plyr_guid`, `plyr_firstname`, `plyr_lastname`, `plyr_trikotnr`, `plyr_birthdate`, `plyr_team_guid`, `plyr_pos_guid`) VALUES
 ('01db224d-9c10-11ea-bd25-50465de98e48', 'Robert', 'Lewandowski', '9', NULL, '1bbe8c38-9c16-11ea-bd25-50465de98e48', NULL),
-('5E74E225-FF9A-4275-AB87-28EDFDF59481', 'c', 'c', NULL, NULL, '0534007c-9c16-11ea-bd25-50465de98e48', NULL),
 ('60148552-0933-4ED5-9894-3BE4DFD317DD', 'david', 'mair', '5', NULL, '1bbe8c38-9c16-11ea-bd25-50465de98e48', NULL),
-('6E321BC4-CD6A-4DEA-B5D8-CEFFCB8A9825', 'a', 'a', NULL, NULL, '0534007c-9c16-11ea-bd25-50465de98e48', NULL),
 ('8a03f993-9b4d-11ea-9916-50465de98e48', 'Leo', 'Messi', '10', '1980-01-01', '1bbe8c38-9c16-11ea-bd25-50465de98e48', NULL),
 ('92974f29-9b5d-11ea-af95-50465de98e48', 'Cristiano', 'Ronaldo', '7', '1990-01-01', '0534007c-9c16-11ea-bd25-50465de98e48', NULL),
-('9C00479A-F2B4-4430-AB0E-3EE1ABB23D22', 'b', 'b', NULL, NULL, '0534007c-9c16-11ea-bd25-50465de98e48', NULL),
 ('b47261ee-9b49-11ea-9916-50465de98e48', 'Daniel', 'Messner', '11', '1998-08-05', '0534007c-9c16-11ea-bd25-50465de98e48', NULL),
-('BC06D5B1-1CE6-410E-AFD1-A7B3ED18E47C', 'd', 'd', NULL, NULL, '0534007c-9c16-11ea-bd25-50465de98e48', NULL),
 ('bd59ab3c-9b49-11ea-9916-50465de98e48', 'Manuel', 'Messner', '1', '1998-08-05', '0534007c-9c16-11ea-bd25-50465de98e48', NULL),
 ('E3C6299C-FE49-4C9A-8ED7-E3863830074F', 'Mohamed', 'Salah', '11', '1990-05-01', '0534007c-9c16-11ea-bd25-50465de98e48', NULL);
 
