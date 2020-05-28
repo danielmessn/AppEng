@@ -41,7 +41,7 @@
     include (dirname(__FILE__).'/components/scripts.php');
     include (dirname(__FILE__).'/components/scriptsSelect.php');
     
-    $modalText = "Delete team with all trainings and matches?";
+    $modalText = "Delete team with all players, trainings and matches?";
     $myFunction = "deleteTeam";
     include (dirname(__FILE__).'/components/modal.php');
 ?>

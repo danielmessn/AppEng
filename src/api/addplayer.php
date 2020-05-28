@@ -21,38 +21,21 @@
       $playerinserted = false;
 
       /* Build the query escaping the values */
-      $query = "INSERT INTO player (plyr_guid, plyr_firstname, plyr_lastname, plyr_trikotnr, plyr_birthdate) VALUES 
+      $query = "INSERT INTO player (plyr_guid, plyr_firstname, plyr_lastname, plyr_trikotnr, plyr_birthdate, plyr_team_guid) VALUES 
       ('$guidnewplayer', '$firstname', '$lastname'
-      , $trikotnr, $birthdate)";
+      , $trikotnr, $birthdate, '$teamguid')";
 
       /* Execute the SQL query */
       if ($conn->query($query))
       {
-        // Redirect user to players.php page
-        $playerinserted = true;
+         // Redirect user to players.php page
+         header("location: ../players.php");
       } else {
         /* if mysqli_query() returns FALSE it means an error occurred */
         echo 'Query error: ' . $conn->error;
-        $conn->close();
-        die();
       }
 
-      if ($playerinserted)
-      {
-        $query = "INSERT INTO player_to_team VALUES 
-        (uuid(), '$guidnewplayer', '" . $conn->real_escape_string($teamguid) . "')";
-
-        if ($conn->query($query))
-        {
-          // Redirect user to players.php page
-          header("location: ../players.php");
-        } else {
-          /* if mysqli_query() returns FALSE it means an error occurred */
-          echo 'Query error: ' . $conn->error;
-        }
-
-        $conn->close();
-      }
+      $conn->close();
 
   }
 

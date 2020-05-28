@@ -9,9 +9,8 @@
     if(empty($teamguid))
         $sql="SELECT * FROM player ORDER BY plyr_lastname";
     else
-        $sql = "Select * from player inner JOIN
-        player_to_team on player.plyr_guid = player_to_team.plyrtoteam_plyr_guid
-        where player_to_team.plyrtoteam_team_guid = '". $conn->real_escape_string($teamguid). "'
+        $sql = "Select * from player 
+        where player.plyr_team_guid = '". $conn->real_escape_string($teamguid). "'
         order by player.plyr_lastname";
 
     $result = $conn->query($sql);
