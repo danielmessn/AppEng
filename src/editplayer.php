@@ -141,7 +141,7 @@
     select = '<option value="">'; 
     data.forEach(position => {       
         option = '<option value="'+position.pos_guid+'">';    
-        option += position.pos_shortcut + '</option>';
+        option += position.pos_shortcut + ' - ' + position.pos_desc + '</option>';
         select += option;
     });
     document.getElementById("selectPosition").innerHTML=select;
