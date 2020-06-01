@@ -14,7 +14,7 @@
       $teaminserted = false;
 
       /* Build the query escaping the values */
-      $query = "INSERT INTO team VALUES ('$guidnewteam', '$desc', 'e0e09b89-9c15-11ea-bd25-50465de98e48')";
+      $query = "INSERT INTO team VALUES ('$guidnewteam', '$desc')";
 
       /* Execute the SQL query */
       if ($conn->query($query))

@@ -57,6 +57,8 @@ fetch('api/getsettings.php')
           if(data!='null'){
               getSettings(JSON.parse(data));
           }
+          else
+            $('.loader').hide();
       }).catch(function(err) {
           console.log ('error ', err);
       });
@@ -71,6 +73,8 @@ fetch('api/getteams.php')
               addTeams(JSON.parse(data));
               $(".loader").hide();
           }
+          else
+            $(".loader").hide();
       }).catch(function(err) {
           console.log ('error ', err);
           $(".loader").hide();

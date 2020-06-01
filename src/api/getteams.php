@@ -8,8 +8,7 @@
         while($row = $result->fetch_assoc()) {
         $guid = $row["team_guid"];
         $name = $row["team_name"];
-        $seaguid = $row["team_sea_guid"];
-        $toJSON [] = ["team_guid"=>$guid,"team_name"=>$name,"team_sea_guid"=>$seaguid];
+        $toJSON [] = ["team_guid"=>$guid,"team_name"=>$name];
         }
     } else {
         $toJSON = null;

@@ -8,9 +8,8 @@
         while($row = $result->fetch_assoc()) {
             $guid = $row["team_guid"];
             $desc = $row["team_name"];
-            $sea_guid = $row["team_sea_guid"];
         }
     }
-    header("Location: ../editteam.php?guid=".$guid."&desc=".$desc."&seaGuid=".$sea_guid); 
+    header("Location: ../editteam.php?guid=".$guid."&desc=".$desc); 
     $conn->close();
 ?>

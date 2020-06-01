@@ -61,6 +61,8 @@
             if(data!='null'){
                 getSettings(JSON.parse(data));
             }
+            else 
+              window.open("settings.php","_self")
         }).catch(function(err) {
             console.log ('error ', err);
         });
@@ -70,6 +72,8 @@
           data.forEach(setting => {       
               selectedTeam = setting.set_team_guid;
           });
+          if (selectedTeam == null)
+            window.open("settings.php","_self")
           getPlayers(selectedTeam);
         }
 
