@@ -58,6 +58,7 @@ fetch('api/getsettings.php')
           if (selectedTeam == null)
             window.open("settings.php","_self")
           getTrainings(selectedTeam);
+          getMatches(selectedTeam);
         }
 
         function getTrainings(teamguid) {
@@ -66,7 +67,7 @@ fetch('api/getsettings.php')
                 return response.text();
             }).then(function(data) {
                 if(data!='null'){
-                  createContent(JSON.parse(data));
+                  createContentTrainings(JSON.parse(data));
                 } else {
                   $(".loader").hide();
                   $("#nextTraining").html($("#nextTraining").html() + '<p>No training planned</p>');
@@ -76,7 +77,23 @@ fetch('api/getsettings.php')
             })
         }
 
-        function createContent(data){
+        function getMatches(teamguid) {
+          fetch('api/getnextmatch.php?teamguid='+teamguid)
+            .then(function(response) {
+                return response.text();
+            }).then(function(data) {
+                if(data!='null'){
+                  createContentMatches(JSON.parse(data));
+                } else {
+                  $(".loader").hide();
+                  $("#nextMatch").html($("#nextMatch").html() + '<p>No match planned</p>');
+                }
+            }).catch(function(err) {
+                console.log ('error ', err);
+            })
+        }
+
+        function createContentTrainings(data){
           let content = '';
           data.forEach(training => {     
               content =
@@ -85,9 +102,24 @@ fetch('api/getsettings.php')
               <a href="api/gettraining.php?guidTraining='+training.train_guid+'" class=\"btn btn-default\">Edit</a>'
           });
 
-          $(".loader").hide();
           $("#nextTraining").html($("#nextTraining").html() + content);
         }
+
+        function createContentMatches(data){
+          let content = '';
+          data.forEach(match => {     
+              content =
+              '<p>'+ match.match_datetime +'</p>\
+              <p>'+ match.match_team_opponent +'</p>\
+              <p>'+ match.match_home_away +'</p>\
+              <a href="api/getmatch.php?guidMatch='+ match.match_guid+'" class=\"btn btn-default\">Edit</a>'
+          });
+
+          $(".loader").hide();
+          $("#nextMatch").html($("#nextMatch").html() + content);
+        }
+
+
 </script>
 </body>
 </html>
