@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2020 at 02:38 PM
--- Server version: 8.0.19
--- PHP Version: 7.3.5
+-- Erstellungszeit: 18. Jun 2020 um 16:39
+-- Server-Version: 8.0.19
+-- PHP-Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,30 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `soccermanager`
+-- Datenbank: `soccermanager`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `player`
+-- Tabellenstruktur für Tabelle `matches`
+--
+
+CREATE TABLE `matches` (
+  `match_guid` varchar(36) NOT NULL,
+  `match_datetime` datetime NOT NULL,
+  `match_team_guid` varchar(36) NOT NULL,
+  `match_team_opponent` varchar(36) NOT NULL,
+  `match_home_away` varchar(4) DEFAULT NULL,
+  `match_team_score` int DEFAULT NULL,
+  `match_opponent_score` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `player`
 --
 
 CREATE TABLE `player` (
@@ -37,10 +54,9 @@ CREATE TABLE `player` (
   `plyr_pos_guid` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
 
 --
--- Table structure for table `position`
+-- Tabellenstruktur für Tabelle `position`
 --
 
 CREATE TABLE `position` (
@@ -50,7 +66,7 @@ CREATE TABLE `position` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `position`
+-- Daten für Tabelle `position`
 --
 
 INSERT INTO `position` (`pos_guid`, `pos_shortcut`, `pos_desc`) VALUES
@@ -73,7 +89,7 @@ INSERT INTO `position` (`pos_guid`, `pos_shortcut`, `pos_desc`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `settings`
+-- Tabellenstruktur für Tabelle `settings`
 --
 
 CREATE TABLE `settings` (
@@ -81,17 +97,9 @@ CREATE TABLE `settings` (
   `set_team_guid` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `settings`
---
-
-INSERT INTO `settings` (`set_guid`, `set_team_guid`) VALUES
-(UUID(), NULL);
-
--- --------------------------------------------------------
 
 --
--- Table structure for table `team`
+-- Tabellenstruktur für Tabelle `team`
 --
 
 CREATE TABLE `team` (
@@ -99,10 +107,9 @@ CREATE TABLE `team` (
   `team_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
 
 --
--- Table structure for table `trainings`
+-- Tabellenstruktur für Tabelle `trainings`
 --
 
 CREATE TABLE `trainings` (
@@ -112,12 +119,20 @@ CREATE TABLE `trainings` (
   `train_team_guid` varchar(36) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
 --
--- Indexes for dumped tables
+-- Indizes der exportierten Tabellen
 --
 
 --
--- Indexes for table `player`
+-- Indizes für die Tabelle `matches`
+--
+ALTER TABLE `matches`
+  ADD PRIMARY KEY (`match_guid`),
+  ADD KEY `match_team_guid` (`match_team_guid`);
+
+--
+-- Indizes für die Tabelle `player`
 --
 ALTER TABLE `player`
   ADD PRIMARY KEY (`plyr_guid`),
@@ -125,44 +140,50 @@ ALTER TABLE `player`
   ADD KEY `plyr_team_guid` (`plyr_team_guid`);
 
 --
--- Indexes for table `position`
+-- Indizes für die Tabelle `position`
 --
 ALTER TABLE `position`
   ADD PRIMARY KEY (`pos_guid`);
 
 --
--- Indexes for table `settings`
+-- Indizes für die Tabelle `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`set_guid`),
   ADD KEY `set_team_guid` (`set_team_guid`);
 
 --
--- Indexes for table `team`
+-- Indizes für die Tabelle `team`
 --
 ALTER TABLE `team`
   ADD PRIMARY KEY (`team_guid`);
 
 --
--- Indexes for table `trainings`
+-- Indizes für die Tabelle `trainings`
 --
 ALTER TABLE `trainings`
   ADD PRIMARY KEY (`train_guid`),
   ADD KEY `train_team_guid` (`train_team_guid`);
 
 --
--- Constraints for dumped tables
+-- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints for table `player`
+-- Constraints der Tabelle `matches`
+--
+ALTER TABLE `matches`
+  ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`match_team_guid`) REFERENCES `team` (`team_guid`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Constraints der Tabelle `player`
 --
 ALTER TABLE `player`
   ADD CONSTRAINT `player_ibfk_1` FOREIGN KEY (`plyr_pos_guid`) REFERENCES `position` (`pos_guid`) ON DELETE SET NULL ON UPDATE RESTRICT,
   ADD CONSTRAINT `player_ibfk_2` FOREIGN KEY (`plyr_team_guid`) REFERENCES `team` (`team_guid`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
--- Constraints for table `trainings`
+-- Constraints der Tabelle `trainings`
 --
 ALTER TABLE `trainings`
   ADD CONSTRAINT `trainings_ibfk_1` FOREIGN KEY (`train_team_guid`) REFERENCES `team` (`team_guid`) ON DELETE CASCADE ON UPDATE RESTRICT;
