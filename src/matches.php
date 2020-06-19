@@ -28,6 +28,7 @@
           <th scope="col">Home/Away</th>
           <th scope="col">Team Score</th>
           <th scope="col">Opponent Score</th>
+          <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody id="bodytableplayers">

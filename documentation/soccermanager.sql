@@ -98,6 +98,8 @@ CREATE TABLE `settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+INSERT INTO `settings`(`set_guid`, `set_team_guid`) VALUES (uuid(),null);
+
 --
 -- Tabellenstruktur für Tabelle `team`
 --
